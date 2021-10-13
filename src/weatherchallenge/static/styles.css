@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}   
+
+header {
+    display: flex;
+    background: rgb(0, 0, 0, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+}
+
+header h2 {
+    color: rgb(0, 0, 0, 0.8);
+    font-weight: 300;
+}
+
+header h3 {
+    color: rgb(0, 0, 0, 0.8);
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+footer {
+    display: flex;
+    background: rgb(0, 0, 0, 0.3);
+    align-items: center;
+    padding: 0.5em 1em;
+    height: 40px;
+    margin-top: -40px;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.4  )
+}

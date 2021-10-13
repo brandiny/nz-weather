@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- CSS Styling -->
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'interface.css' %}">
+{% endblock %}
+
+
+
+<!-- Main content -->
+{% block content %}
+
+<div id="interface" class="{{weather_status}}">
+    <div id="weather-data">
+        <div id="weather-data-location">
+            <h2>{{city_name}}</h2>
+            <p>{{date}}</p>
+        </div>
+
+        <div id="weather-data-temperature">
+            <p>High {{temp_max}}° <strong>·</strong> Low {{temp_min}}°</p>
+            <div><p>{{temp}}</p><p>°C</p></div>
+            <p>Feels like {{temp_feels_like}}°</p>
+        </div>
+    </div>
+
+    <!-- <div id="weather-picture">
+        
+    </div> -->
+
+    <div id="weather-specifics">
+        
+        <p>Pressure</p><p>{{pressure}} hpa</p>
+        <p>Cloudiness</p><p>{{clouds}} %</p>
+        <p>Humidity</p><p>{{humidity}} %</p>
+        <p>Wind speed</p><p>{{wind_speed}} m/s</p>
+        <p>Wind gust</p><p>{{wind_gust}} m/s</p>
+        <p>Wind angle</p><p>{{wind_angle}}° from North</p>
+        <p>Precipitation (1hr)</p><p>{{precipitation}} mm</p>
+        <p>Weather description</p><p>{{description}}</p>
+    </div>
+
+    <form id="weather-form" action="/" method="GET">
+        {{ city_form }}
+    </form>
+
+</div>
+
+
+
+{% endblock %}

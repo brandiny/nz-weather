@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='shortcut icon' type='image/x-icon' href="/static/favicon.ico" />
+    <link rel="icon" type="image/png" href="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>
+        Wellington
+        NZ
+        | 12.47°C
+    </title>
+
+    <!-- CSS Styling -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #interface {
+            display: flex;
+        }
+
+        #interface > * {
+            padding: 1.5em 3em;
+        }
+
+
+        #interface-background {
+            z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%
+        }
+
+        #weather-data {
+            color: white;
+            font-weight: 500;
+        }
+        
+        #weather-data-location {
+            color: black;
+            margin-bottom: 1em;            
+        }
+
+        #weather-data-location {
+            font-weight: 300;
+        }
+
+        #weather-data-temperature div {
+            display: flex;
+            font-size: 3em;
+        }
+
+        #weather-data-temperature div p:last-child{
+            font-size: 0.7em;
+            padding-top: 3px;
+        }
+
+        .rain {
+            background: rgb(83,120,158);
+            background: linear-gradient(129deg, rgba(83,120,158,1) 35%, rgba(146,186,210,1) 100%);
+        }
+
+        #weather-specifics {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            grid-auto-rows: minmax(min-content, max-content);
+            /* border-left: 1px solid; */
+        }
+
+        #weather-specifics p:nth-child(odd) {
+            color: rgb(0, 0, 0, 0.6)
+        }
+
+        #weather-form {
+            display: flex;
+            flex-direction: column;
+        }
+        #weather-form select{
+            margin-top: 1em;
+            border: 0;
+            outline: 0;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <!-- Main content of the page -->
+    <div id="interface">
+        <div id="interface-background" class="rain"></div>
+        <div id="weather-data">
+            <div id="weather-data-location">
+                <h2>Wellington</h2>
+                <p>13 October, 10.48 am</p>
+            </div>
+    
+            <div id="weather-data-temperature">
+                <p>High 8° <strong>·</strong> Low 5.3°</p>
+                <div><p>6</p><p>°C</p></div>
+                <p>Feels like -1°</p>
+            </div>
+        </div>
+
+        <!-- <div id="weather-picture">
+            
+        </div> -->
+
+        <div id="weather-specifics">
+            <p>Pressure</p><p>1003hpa</p>
+            <p>Humidity</p><p>81%</p>
+            <p>Wind speed</p><p>1.34m/s</p>
+            <p>Precipitation (1hr)</p><p>100mm</p>
+        </div>
+
+        <form id="weather-form" action="/" method="GET">
+            <tr>
+                <th><label for="id_city">Choose another city:</label></th>
+                <td><select name="city" onchange="this.form.submit()" id="id_city">
+                        <option value="auckland">Auckland</option>
+                        <option value="christchurch">Christchurch</option>
+                        <option value="wellington">Wellington</option>
+                        <option value="hamilton" selected>Hamilton</option>
+                        <option value="tauranga">Tauranga</option>
+                        <option value="napier">Napier</option>
+                        <option value="dunedin">Dunedin</option>
+                    </select></td>
+            </tr>
+        </form>
+    
+    </div>
+</body>
+
+</html>
