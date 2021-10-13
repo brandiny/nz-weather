@@ -1,3 +1,5 @@
+/* styling for the weather app */
+
 #interface {
     display: flex;
     flex-flow: wrap;

@@ -1,5 +1,7 @@
 from django import forms
 
+# Dropdown box for choosing a city
+# To add more cities, add to city_choices
 class CityForm(forms.Form):
     CITY_CHOICES = [
         ("auckland", "Auckland"),

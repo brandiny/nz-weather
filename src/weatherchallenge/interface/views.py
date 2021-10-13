@@ -6,12 +6,11 @@ from . import services
 from .forms import CityForm
 
 
-
 # Main view for the page
 def interface_view(request):
     default_city = "wellington"
 
-    # If selecting a city, sanitise it. Otherwise - use default
+    # If selecting a city, sanitise input city. Otherwise - use default city
     if request.method == "GET":
         form = CityForm(request.GET)
         if form.is_valid():
@@ -26,7 +25,7 @@ def interface_view(request):
 
     weather_data = services.get_weather_data(city_name)
     weather_data = {} if weather_data is None else weather_data
-
+    
     context["date"]             = "-" if "dt" not in weather_data else services.utc_to_datestring(weather_data["dt"])
     context["temp"]             = "n/a" if "main" not in weather_data else int(round(weather_data["main"]["temp"], 0))
     context["description"]      = "n/a" if "main" not in weather_data else weather_data["weather"][0]["description"].title()

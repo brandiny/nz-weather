@@ -1,10 +1,11 @@
+from django.forms.fields import JSONField, JSONString
 import requests
 import pprint
 from datetime import datetime
 
 # Returns weather data by city (NZ only) in JSON format
 # https://openweathermap.org/current#current_JSON - data format
-def get_weather_data(city_name):
+def get_weather_data(city_name: str) -> JSONString:
     url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
         "q": city_name + ", NZ",
@@ -22,8 +23,8 @@ def get_weather_data(city_name):
 
 
 # Given an integer UTC timestamp, returns date time string
-# e.g 
-def utc_to_datestring(utc_int):
+# e.g 1634115646 --> Oct 13, 10.00pm
+def utc_to_datestring(utc_int: int) -> str:
     MONTH_STRINGS = {
         1: "January",
         2: "February",
