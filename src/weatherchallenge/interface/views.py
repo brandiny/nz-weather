@@ -44,7 +44,7 @@ def interface_view(request):
     context["weather_status"] = "rain"
     if weather_data is not None:
         # In reverse order of importance
-        # clouds --> rain --> nighttime
+        # clouds --> rain
         if context["clouds"] != "-" and context["clouds"] <= 30:
             context["weather_status"] = "fine"
 
@@ -54,12 +54,6 @@ def interface_view(request):
         if context["precipitation"] != "-" and context["precipitation"] > 10:
             context["weather_status"] = "rain"
 
-        if datetime.now().hour > 18:
-            context["weather_status"] = "night"
-
-        
-        
-        
         
     return render(request, "interface.html", context)
 
