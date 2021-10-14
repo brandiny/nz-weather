@@ -1,4 +1,4 @@
-/* styling for the weather app */
+/* styling for the main weather data display */
 
 #interface {
     display: flex;
@@ -11,6 +11,7 @@
     padding: 1.5em 3em;
 }
 
+/* on smaller screens, use flex wrap and stretch */
 /* on larger screens, don't stretch info */
 @media screen and (min-width: 1200px) {
     #interface > * { 
@@ -42,21 +43,6 @@
     padding-top: 3px;
 }
 
-.fine {
-    background: rgb(65,174,255);
-    background: linear-gradient(124deg, rgba(65,174,255,1) 35%, rgba(39,105,227,1) 100%);
-}
-
-.rain {
-    background: rgb(83,120,158);
-    background: linear-gradient(129deg, rgba(83,120,158,1) 35%, rgba(146,186,210,1) 100%);
-}
-
-.night {
-    background: rgb(92,84,164);
-    background: linear-gradient(124deg, rgba(92,84,164,1) 35%, rgba(12,20,69,1) 100%);
-}
-
 #weather-specifics {
     display: grid;
     grid-template-columns: 170px 1fr;
@@ -77,7 +63,7 @@
     color: rgba(0, 0, 0, 0.7);
 }
 
-/* https://stackoverflow.com/questions/56593500/change-the-dropdown-arrow-design */
+/* arrow from - https://stackoverflow.com/questions/56593500/change-the-dropdown-arrow-design */
 #weather-form select{
     appearance: none;
     margin-top: 1em;
@@ -90,5 +76,18 @@
     background-size: .65em auto, 100%;
 }
 
+/* styling for the weather background depending on types - make sure you add logic in view.py*/
+.fine {
+    background: rgb(65,174,255);
+    background: linear-gradient(124deg, rgba(65,174,255,1) 35%, rgba(39,105,227,1) 100%);
+}
 
+.rain {
+    background: rgb(83,120,158);
+    background: linear-gradient(129deg, rgba(83,120,158,1) 35%, rgba(146,186,210,1) 100%);
+}
 
+.night {
+    background: rgb(92,84,164);
+    background: linear-gradient(124deg, rgba(92,84,164,1) 35%, rgba(12,20,69,1) 100%);
+}

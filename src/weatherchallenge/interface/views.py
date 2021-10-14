@@ -9,6 +9,7 @@ from .forms import CityForm
 # Main view for the page
 def interface_view(request):
     default_city = "wellington"
+    city_name = ""
 
     # If selecting a city, sanitise input city. Otherwise - use default city
     if request.method == "GET":
@@ -37,22 +38,20 @@ def interface_view(request):
     context["wind_speed"]       = "-" if "wind" not in weather_data else round(weather_data["wind"]["speed"], 0)
     context["wind_gust"]        = "-" if "wind" not in weather_data else round(weather_data["wind"]["gust"], 0)
     context["wind_angle"]       = "-" if "wind" not in weather_data else round(weather_data["wind"]["deg"], 0)
-    context["precipitation"]    = "-" if "rain" not in weather_data else round(weather_data["rain"]["1h"], 0)
+    context["precipitation"]    = "0" if "rain" not in weather_data else round(weather_data["rain"]["1h"], 0)
     context["clouds"]           = "-" if "clouds" not in weather_data else round(weather_data["clouds"]["all"], 0)
     
-    context["weather_status"] = "rain"
+    context["weather_status"] = "rain"  # Displays rain if no weather data can be fetched
+
+    # Determine weather status
     if weather_data is not None:
-        # In reverse order of importance
-        # clouds --> rain
         if context["clouds"] != "-" and context["clouds"] <= 30:
             context["weather_status"] = "fine"
-
         else:
             context["weather_status"] = "rain"
 
         if context["precipitation"] != "-" and context["precipitation"] > 10:
             context["weather_status"] = "rain"
 
-        
     return render(request, "interface.html", context)
 

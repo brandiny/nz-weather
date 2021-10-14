@@ -16,7 +16,6 @@ def get_weather_data(city_name: str) -> JSONString:
     try:
         response = requests.get(url, params)
         response.raise_for_status()
-        pprint.pprint(response.json())
         return response.json()
     except Exception as error:
         return None
