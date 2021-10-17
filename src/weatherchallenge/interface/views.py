@@ -1,6 +1,4 @@
-from datetime import datetime
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from . import services
 from .forms import CityForm
@@ -26,7 +24,7 @@ def interface_view(request):
 
     weather_data = services.get_weather_data(city_name)
     weather_data = {} if weather_data is None else weather_data
-    
+
     context["date"]             = "-" if "dt" not in weather_data else services.utc_to_datestring(weather_data["dt"])
     context["temp"]             = "n/a" if "main" not in weather_data else int(round(weather_data["main"]["temp"], 0))
     context["description"]      = "n/a" if "main" not in weather_data else weather_data["weather"][0]["description"].title()
@@ -35,18 +33,20 @@ def interface_view(request):
     context["temp_max"]         = "-" if "main" not in weather_data else round(weather_data["main"]["temp_max"], 1)
     context["pressure"]         = "-" if "main" not in weather_data else round(weather_data["main"]["pressure"], 0)
     context["humidity"]         = "- " if "main" not in weather_data else round(weather_data["main"]["humidity"], 0)
-    
+    context["precipitation"]    = "0" if "rain" not in weather_data else round(weather_data["rain"]["1h"], 0)
+    context["clouds"]           = "-" if "clouds" not in weather_data else round(weather_data["clouds"]["all"], 0)
+
+
     # Occasionally, wind data is missing.
     # Other checks should be added but haven't been due to exam studying
     if "wind" in weather_data:
         context["wind_speed"]       = "-" if "speed" not in weather_data["wind"] else round(weather_data["wind"]["speed"], 0)
         context["wind_angle"]       = "-" if "deg" not in weather_data["wind"] else round(weather_data["wind"]["deg"], 0)
         context["wind_gust"]        = "-" if "gust" not in weather_data["wind"] else round(weather_data["wind"]["gust"], 0)
-    
-    context["precipitation"]    = "0" if "rain" not in weather_data else round(weather_data["rain"]["1h"], 0)
-    context["clouds"]           = "-" if "clouds" not in weather_data else round(weather_data["clouds"]["all"], 0)
-    
-    context["weather_status"] = "rain"  # Displays rain if no weather data can be fetched
+
+
+    # Displays rain status if no weather data can be fetched
+    context["weather_status"] = "rain"
 
     # Determine weather status
     if weather_data is not None:
