@@ -35,9 +35,14 @@ def interface_view(request):
     context["temp_max"]         = "-" if "main" not in weather_data else round(weather_data["main"]["temp_max"], 1)
     context["pressure"]         = "-" if "main" not in weather_data else round(weather_data["main"]["pressure"], 0)
     context["humidity"]         = "- " if "main" not in weather_data else round(weather_data["main"]["humidity"], 0)
-    context["wind_speed"]       = "-" if "wind" not in weather_data else round(weather_data["wind"]["speed"], 0)
-    context["wind_gust"]        = "-" if "wind" not in weather_data else round(weather_data["wind"]["gust"], 0)
-    context["wind_angle"]       = "-" if "wind" not in weather_data else round(weather_data["wind"]["deg"], 0)
+    
+    # Occasionally, wind data is missing.
+    # Other checks should be added but haven't been due to exam studying
+    if "wind" in weather_data:
+        context["wind_speed"]       = "-" if "speed" not in weather_data["wind"] else round(weather_data["wind"]["speed"], 0)
+        context["wind_angle"]       = "-" if "deg" not in weather_data["wind"] else round(weather_data["wind"]["deg"], 0)
+        context["wind_gust"]        = "-" if "gust" not in weather_data["wind"] else round(weather_data["wind"]["gust"], 0)
+    
     context["precipitation"]    = "0" if "rain" not in weather_data else round(weather_data["rain"]["1h"], 0)
     context["clouds"]           = "-" if "clouds" not in weather_data else round(weather_data["clouds"]["all"], 0)
     
@@ -50,7 +55,7 @@ def interface_view(request):
         else:
             context["weather_status"] = "rain"
 
-        if context["precipitation"] != "-" and context["precipitation"] > 10:
+        if context["precipitation"] != "-" and int(context["precipitation"]) > 10:
             context["weather_status"] = "rain"
 
     return render(request, "interface.html", context)
