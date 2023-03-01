@@ -1,5 +1,4 @@
 # nz-weather
-For a live build, visit - https://brandonru.pythonanywhere.com/<br>
 NZ Openweather API data rendered using Django3 and requests ☀️ 
 
 
